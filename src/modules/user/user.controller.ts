@@ -1,5 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { PublicRoute } from '../auth/decorators/public-route.decorator';
 import { CreateUserUseCase } from './use-cases/create-user/create-user.use-case';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ReturnUserDto } from './dto/return-user.dto';
@@ -8,7 +9,7 @@ import { ReturnUserDto } from './dto/return-user.dto';
 @Controller('users')
 export class UserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
-  // @Public()
+  @PublicRoute()
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<ReturnUserDto> {
     return await this.createUserUseCase.execute(createUserDto);
