@@ -1,19 +1,19 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import type { SignUpDto, SignInDto } from './dtos/auth';
-import { AuthService } from './auth.service';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { PublicRoute } from './decorators/public-route.decorator';
+import { SignInUserCase } from './use-case/sign-in-user.user-case';
+import { SignInDto } from './dto/sign-in.dto';
+import { JWTTokenUserData } from './dto/jwt-token-user-data.tdo';
 
+@ApiTags('Autenticação')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private signInUserCase: SignInUserCase) {}
 
-  @Post('signup')
-  async signup(@Body() body: SignUpDto) {
-    return await this.authService.signup(body);
-  }
-
-  @Post('signin')
-  async signin(@Body() body: SignInDto) {
-    await this.authService.signin(body);
-    return body;
+  @PublicRoute()
+  @Post('sign-in')
+  @ApiOperation({ summary: 'Realiza login do usuário' })
+  async signIn(@Body() signInDto: SignInDto): Promise<JWTTokenUserData> {
+    return await this.signInUserCase.execute(signInDto);
   }
 }

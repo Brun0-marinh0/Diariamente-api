@@ -1,4 +1,5 @@
 export interface IUserEntity {
+  id: number;
   name: string;
   lastName: string;
   age: number;

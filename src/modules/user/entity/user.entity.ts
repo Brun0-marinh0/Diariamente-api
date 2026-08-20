@@ -12,6 +12,8 @@ import {
 } from 'class-validator';
 
 export class userEntity implements IUserEntity {
+  id!: number;
+
   @Matches(/^\s*[a-zA-ZÀ-ÖØ-öø-ÿ]+(?: [a-zA-ZÀ-ÖØ-öø-ÿ]+)*\s*$/, {
     message:
       'O campo Nome não pode conter caracteres especiais ou somente espaços.',

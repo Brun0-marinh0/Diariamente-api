@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { ReturnUserDto } from '../../dto/return-user.dto';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { IUsersRepository } from '../IUsers.repository';
+import { userEntity } from '../../entity/user.entity';
 
 @Injectable()
 export class UserPrismaRepository implements IUsersRepository {
@@ -16,6 +17,12 @@ export class UserPrismaRepository implements IUsersRepository {
         ...createUserDto,
         password: hashedPassword,
       },
+    });
+  }
+
+  async findByEmail(email: string): Promise<userEntity | null> {
+    return await this.prismaService.user.findUnique({
+      where: { email },
     });
   }
 }
