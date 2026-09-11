@@ -6,7 +6,7 @@ export interface IEntries {
   entryDate: Date;
   createdAt: Date;
   updatedAt: Date;
-  feeling: string;
+  emotionLevel: number;
   feelings: IFeeling;
   tags: string[];
   wordCount: number;
