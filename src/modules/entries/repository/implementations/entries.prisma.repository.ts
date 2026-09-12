@@ -18,4 +18,11 @@ export class EntriesPrismaRepository implements IEntriesRepository {
     });
     return entries as unknown as ReturnEntryDto[];
   }
+
+  async findById(id: number): Promise<ReturnEntryDto | null> {
+    const entry = await this.prismaService.entry.findUnique({
+      where: { id },
+    });
+    return entry as unknown as ReturnEntryDto | null;
+  }
 }

@@ -3,6 +3,7 @@ import { EntriesEntity } from '../entity/entries.entity';
 
 export class ReturnEntryDto extends PickType(EntriesEntity, [
     'id',
+    'userId',
     'title',
     'content',
     'entryDate',

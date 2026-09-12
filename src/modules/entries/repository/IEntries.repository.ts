@@ -5,4 +5,5 @@ export interface IEntriesRepository {
         data: CreateEntryDto & { userId: number; wordCount: number },
     ): Promise<ReturnEntryDto>;
     findAllByUser(userId: number): Promise<ReturnEntryDto[]>;
+    findById(id: number): Promise<ReturnEntryDto | null>;
 }
