@@ -21,4 +21,20 @@ model User {
   sex String
   email String @unique
   password String
+  entries Entry[]
+}
+
+model Entry {
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  title String
+  content String
+  entryDate DateTime
+  emotionLevel Int
+  feelings Json
+  tags String[]
+  wordCount Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
