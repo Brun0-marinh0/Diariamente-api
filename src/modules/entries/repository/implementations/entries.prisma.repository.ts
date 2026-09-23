@@ -25,4 +25,18 @@ export class EntriesPrismaRepository implements IEntriesRepository {
     });
     return entry as unknown as ReturnEntryDto | null;
   }
+
+  async update(id: number, data): Promise<ReturnEntryDto> {
+    const entry = await this.prismaService.entry.update({
+      where: { id },
+      data,
+    });
+    return entry as unknown as ReturnEntryDto;
+  }
+
+  async delete(id: number): Promise<void> {
+    await this.prismaService.entry.delete({
+      where: { id },
+    });
+  }
 }
